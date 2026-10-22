@@ -1,0 +1,7 @@
+# Dependencias del CI para renderizar los notebooks con Quarto.
+# Regenerar el lockfile con hashes después de editar este archivo:
+#   uv pip compile requirements-ci.in --generate-hashes --python-version 3.12 --python-platform linux -o requirements-ci.txt
+jupyter==1.1.1
+nbformat==5.11.1
+# 7.17.2 corrige CVE-2026-114140 (path traversal)
+nbconvert>=7.17.2

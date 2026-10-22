@@ -16,3 +16,6 @@ data/processed/
 /_site/
 
 .DS_Store
+
+# Herramientas locales del agente
+.atl/
