@@ -1,0 +1,88 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - resumen.qmd
+    - decisiones.qmd
+    - reproducibilidad.qmd
+    - en/summary.qmd
+    - notebooks/*.ipynb
+
+lang: es
+
+website:
+  title: "RCT · Cuidado infantil y empleo"
+  description: "¿Ampliar el horario de cuidado infantil aumenta el empleo de las madres? Evaluación experimental con 1 500 madres postulantes."
+  site-url: https://laurenteeber.github.io/rct-cuidado-infantil/
+  repo-url: https://github.com/LaurenteEber/rct-cuidado-infantil
+  repo-actions: [source]
+  image: assets/social-card.png
+  open-graph:
+    image: assets/social-card.png
+  twitter-card:
+    image: assets/social-card.png
+    card-style: summary_large_image
+  page-navigation: true
+  navbar:
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: resumen.qmd
+        text: Resumen
+      - text: Análisis
+        menu:
+          - href: notebooks/00_planteamiento_teoria_cambio.ipynb
+            text: "00 · Planteamiento y teoría de cambio"
+          - href: notebooks/01_datos_auditoria_construccion.ipynb
+            text: "01 · Datos y construcción de variables"
+          - href: notebooks/02_diseno_validez_interna.ipynb
+            text: "02 · Diseño y validez interna"
+          - href: notebooks/03_eda.ipynb
+            text: "03 · Análisis exploratorio"
+          - href: notebooks/04_analisis_causal.ipynb
+            text: "04 · Análisis causal"
+          - href: notebooks/05_sensibilidad_robustez.ipynb
+            text: "05 · Sensibilidad y robustez"
+      - href: decisiones.qmd
+        text: Decisiones metodológicas
+      - href: reproducibilidad.qmd
+        text: Reproducibilidad
+    right:
+      - href: en/summary.qmd
+        text: English
+      - icon: github
+        href: https://github.com/LaurenteEber/rct-cuidado-infantil
+        aria-label: Repositorio en GitHub
+  sidebar:
+    - title: Análisis
+      contents:
+        - notebooks/00_planteamiento_teoria_cambio.ipynb
+        - notebooks/01_datos_auditoria_construccion.ipynb
+        - notebooks/02_diseno_validez_interna.ipynb
+        - notebooks/03_eda.ipynb
+        - notebooks/04_analisis_causal.ipynb
+        - notebooks/05_sensibilidad_robustez.ipynb
+  page-footer:
+    left: "Eber Laurente · Grupo 5, curso de Evaluación de Políticas Públicas (CIES)"
+    right: "Código MIT · [GitHub](https://github.com/LaurenteEber/rct-cuidado-infantil)"
+
+format:
+  html:
+    theme:
+      light: [cosmo, assets/styles.scss]
+      dark: [darkly, assets/styles-dark.scss]
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    code-summary: "Ver código"
+    code-tools: true
+    smooth-scroll: true
+    anchor-sections: true
+    fig-responsive: true
+    df-print: default
+    mainfont: Inter
+    html-math-method: katex
+
+execute:
+  enabled: false

@@ -1,0 +1,59 @@
+---
+code-tools: false
+title: "Reproducibilidad y validación"
+---
+
+## Estructura del repositorio
+
+```
+rct-cuidado-infantil/
+├── notebooks/        # 00 a 05: el análisis completo, ya ejecutado
+├── src/impact_eval/  # Funciones de ingesta, construcción de variables y estimación
+├── tests/            # Pruebas unitarias con datos sintéticos
+├── data/raw/         # Aquí va la base del curso (no incluida)
+└── *.qmd             # Páginas de este sitio (Quarto)
+```
+
+## Datos
+
+La base (`caso05_cuidado_infantil.dta`, 1 500 madres postulantes y 18 variables) y su diccionario son **material del curso de Evaluación de Políticas Públicas del CIES** y no se publican. Los notebooks se muestran con todos sus resultados ya ejecutados, así que el análisis se puede leer completo sin los datos.
+
+Si tienes acceso a la base, colócala en `data/raw/` para volver a ejecutarlo.
+
+## Cómo reproducir
+
+Requiere Python 3.12 y [uv](https://docs.astral.sh/uv/).
+
+```bash
+git clone https://github.com/LaurenteEber/rct-cuidado-infantil.git
+cd rct-cuidado-infantil
+uv sync                      # instala el entorno
+uv run pytest -v             # pruebas unitarias (no requieren la base)
+uv run jupyter lab           # ejecuta los notebooks en orden: 00 → 05
+```
+
+El notebook 01 genera `data/processed/caso05_analitico.csv`, que usan los notebooks 02 a 05. La semilla aleatoria (2026) fija la inferencia por aleatorización y los remuestreos.
+
+## Cómo se diseñaron los notebooks
+
+- **Autocontenidos:** cada notebook define sus propias funciones y puede leerse por sí solo. Las mismas funciones están en `src/impact_eval/` con pruebas unitarias.
+- **Misma estructura en cada etapa:** objetivo y justificación → fundamento metodológico → código → interpretación → supuestos y limitaciones → decisión para la siguiente etapa.
+- **Lenguaje sencillo:** cada término técnico se explica en un recuadro "En sencillo".
+- **Citas verificadas:** referencias numeradas al final de cada notebook.
+
+## Validación
+
+El análisis pasó por una revisión de validación, con estos cuatro frentes:
+
+| Frente | Qué se revisó |
+|---|---|
+| Texto frente a resultados | Cada cifra citada en las interpretaciones coincide con los resultados ejecutados |
+| Recálculo independiente | ITT, primera etapa, LATE, balance, Holm, inferencia por aleatorización, IPW y cotas de Lee y de Manski, recalculados con código separado; todos coinciden |
+| Metodología | Estimandos, supuestos, errores estándar y pruebas, con cada hallazgo corregido en la versión publicada |
+| Coherencia | Las decisiones anunciadas en un notebook se cumplen en los siguientes |
+
+Las pruebas unitarias (`tests/`) verifican con datos sintéticos de efecto conocido que los estimadores recuperan el efecto verdadero: ITT, cociente de Wald, inferencia por aleatorización, cotas de Lee, bootstrap estratificado, balance y construcción de variables.
+
+## Herramientas
+
+Python · pandas · statsmodels · linearmodels · SciPy · Matplotlib · seaborn · pytest · Quarto · GitHub Pages

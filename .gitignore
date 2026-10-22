@@ -1,0 +1,18 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Datos (no se publican: material del curso)
+data/raw/*
+data/processed/
+!data/raw/.gitkeep
+
+# Quarto
+/.quarto/
+/_site/
+
+.DS_Store

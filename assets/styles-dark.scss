@@ -1,0 +1,37 @@
+/*-- scss:defaults --*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+$font-family-sans-serif: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+$primary: #818CF8;
+$link-color: #A5B4FC;
+$body-bg: #0B1120;
+$navbar-bg: #0F172A;
+$code-color: #6EE7B7;
+
+/*-- scss:rules --*/
+h1, h2, h3 { font-weight: 700; letter-spacing: -0.01em; }
+.hero { background: #111827; color: #E2E8F0; border: 1px solid #1F2937; border-radius: 16px; padding: 2.5rem 2rem; margin: 0 0 2rem 0; }
+.hero .kicker { color: #A5B4FC; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: .8rem; }
+.hero h1 { color: #FFFFFF; font-size: 2.2rem; line-height: 1.2; margin: .6rem 0 1rem 0; border: 0; }
+.hero p { color: #CBD5E1; font-size: 1.1rem; margin-bottom: 1.4rem; }
+.hero .btn { margin: .25rem .4rem .25rem 0; font-weight: 600; border-radius: 8px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; margin: 1.5rem 0 2rem 0; }
+.stat { background: #111827; border: 1px solid #1F2937; border-radius: 12px; padding: 1.1rem 1.2rem; }
+.stat .num { color: #A5B4FC; font-size: 2rem; font-weight: 800; line-height: 1.1; }
+.stat .lab { color: #F1F5F9; font-weight: 700; margin-top: .35rem; }
+.stat .det { color: #94A3B8; font-size: .85rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 1rem 0 2rem 0; }
+.card-x { border-top: 3px solid #818CF8; padding: 1rem 0 0 0; }
+.card-x.amber { border-top-color: #F59E0B; }
+.card-x.green { border-top-color: #10B981; }
+.card-x h4 { font-weight: 700; font-size: 1.05rem; margin: 0 0 .4rem 0; }
+.card-x p { font-size: .95rem; margin: 0; }
+.chapters a { text-decoration: none; }
+.chapter { display: flex; gap: .9rem; align-items: flex-start; padding: .8rem 0; border-bottom: 1px solid #1F2937; }
+.chapter .n { background: #818CF8; color: #0B1120; border-radius: 50%; width: 2rem; height: 2rem; min-width: 2rem; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .85rem; }
+.chapter .t { color: #F1F5F9; font-weight: 700; }
+.chapter .d { color: #94A3B8; font-size: .92rem; }
+@media (max-width: 576px) {
+  .hero { padding: 1.6rem 1.2rem; }
+  .hero h1 { font-size: 1.55rem; }
+  .hero p { font-size: 1rem; }
+}

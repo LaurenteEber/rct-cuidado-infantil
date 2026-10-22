@@ -1,0 +1,104 @@
+---
+code-tools: false
+title: "Decisiones metodológicas"
+subtitle: "Qué se hizo, por qué, qué se descartó y qué habría cambiado"
+---
+
+Un resultado es tan creíble como las decisiones que lo producen. Esta página reúne cada elección del análisis causal con su justificación. Los estimandos, las covariables y los subgrupos se fijaron en el [notebook 00](notebooks/00_planteamiento_teoria_cambio.ipynb), **antes de ver los resultados**.
+
+## 1. Qué se estima
+
+| Decisión | Por qué | Qué se descartó | Qué habría cambiado |
+|---|---|---|---|
+| **ITT como estimando principal** | Responde la pregunta de política (qué pasa si se ofrece el servicio) y solo depende del sorteo | Analizar solo a quienes cumplieron lo asignado | Se habría perdido la protección del sorteo |
+| **LATE como estimando secundario** | Responde el mecanismo (qué hace el servicio a quien lo usa), pero requiere supuestos de variables instrumentales | El efecto promedio del uso en *todas* las madres (ATE) | No se puede identificar: siempre usuarias y nunca usuarias no responden al sorteo |
+| **No comparar usuarias con no usuarias** | El uso es una decisión de cada madre: ningún sorteo lo protege. Las usuarias tienen bastante menos red de cuidado (SMD de −0.3 a −0.4) | Comparación según uso o por protocolo | Estimados de 16.7-17.3 pp, sin garantía de validez |
+
+## 2. Cómo se especifica el modelo
+
+| Decisión | Por qué | Qué se descartó | Qué habría cambiado |
+|---|---|---|---|
+| **Efectos fijos de centro** | El sorteo fue estratificado por centro (50 % exacto en cada uno). El estimador debe reflejar cómo se asignó el tratamiento | Ignorar el centro | Nada en el punto estimado, porque la probabilidad de sorteo es igual en todos los centros |
+| **10 covariables previas, fijadas de antemano** | Son previas al sorteo, así que no pueden ser consecuencia del tratamiento. Explican el 17-20 % de la varianza de horas e ingreso | Elegirlas después de ver los resultados | Riesgo de buscar la especificación más favorable |
+| **Ajuste por MCO (y no solo diferencia de medias)** | Reduce el error estándar ≈ 7-8 % en horas e ingreso sin cambiar el estimado | Solo la diferencia de medias | Empleo: 9.63 frente a 9.66 pp |
+| **Comprobación con el estimador de Lin** | Responde a la crítica de Freedman: con muestras pequeñas el ajuste puede sesgar levemente | — | 9.664 frente a 9.661 pp: sin indicios de sesgo |
+| **Modelo lineal y no logit para el empleo** | El coeficiente se lee en puntos porcentuales y ninguna predicción cae fuera de [0, 1] | Logit como modelo principal | Efecto marginal del logit: 9.63 pp |
+| **Ingreso en niveles, con ceros** | Mide el efecto total. El logaritmo obligaría a excluir a las que no trabajan, es decir, condicionar en un colisionador | Logaritmo del ingreso | Se habría mezclado el efecto con un cambio en *quién* trabaja |
+
+## 3. Cómo se mide la incertidumbre
+
+| Decisión | Por qué | Qué se descartó | Qué habría cambiado |
+|---|---|---|---|
+| **Errores estándar HC3** | Con un resultado binario, la varianza del error cambia entre observaciones por construcción, y Breusch-Pagan lo confirma (p < 0.001 en empleo, horas e ingreso). HC3 corrige además la influencia de cada observación y es el más conservador en muestras finitas | Errores clásicos, HC0 o HC1 | Casi nada en el número (en empleo: 2.47 clásico, 2.48 HC3). Se elige porque es válido aunque el modelo no sea perfecto |
+| **No agrupar errores por centro** | Se agrupa cuando la asignación se hace por grupo, y aquí fue madre por madre. Además, con solo 5 grupos la corrección es inestable | Errores agrupados por centro | Resultados erráticos: −30 % en el error de bienestar y +11 % en el de ingreso |
+| **Holm sobre los resultados secundarios** | Controla los falsos positivos en la familia (horas, ingreso, bienestar) sin suponer independencia, y es más potente que Bonferroni. El empleo, resultado primario, no se ajusta | Bonferroni o no corregir | Ninguna conclusión cambia: los p ajustados son menores que 10⁻⁶ |
+| **Inferencia por aleatorización** | Usa solo el mecanismo del sorteo (5 000 permutaciones dentro de cada centro), sin aproximaciones de muestra grande | Confiar solo en los valores p asintóticos | Confirma los resultados: ninguna permutación igualó el efecto observado |
+
+## 4. Del ITT al LATE
+
+| Decisión | Por qué | Qué habría cambiado |
+|---|---|---|
+| **Mínimos cuadrados en dos etapas (2SLS)** | Da el mismo punto que dividir el ITT entre la primera etapa (π = 0.62), pero con el error estándar correcto, efectos fijos y covariables | El punto sería igual (15.5 pp), pero sin un margen de error válido |
+| **F efectivo como medida de fuerza del instrumento** | Con un instrumento y errores robustos, es el diagnóstico adecuado | F ≈ 963: supera incluso el umbral exigente de 104.7 |
+| **Monotonicidad verificada en sus implicancias** | π > 0 en 37 subgrupos (mínimo 0.52) y 4 desigualdades comprobables que se cumplen con amplio margen | Una violación habría hecho fallar las desigualdades |
+| **Exclusión sometida a sensibilidad** | No se puede probar, así que se mide cuánto tendría que fallar | El LATE de empleo deja de ser significativo solo si el sorteo, por sí mismo, explicara ≈ 51 % del ITT |
+
+## 5. Subgrupos y mecanismo
+
+| Decisión | Por qué |
+|---|---|
+| **Subgrupos definidos de antemano** | Madres solas, sin red de cuidado, ambas condiciones y con empleo previo, según la teoría de cambio. Evita buscar subgrupos "significativos" a posteriori |
+| **Interacción en vez de estimaciones separadas** | Prueba directamente la *diferencia* entre subgrupos; que uno sea significativo y otro no, no implica que difieran |
+| **Reportar el poder para detectar diferencias** | Solo se detectarían diferencias de 14-19 puntos: "no significativo" no significa "igual" |
+| **Cotas de Lee para el margen intensivo** | Comparar solo a las empleadas condiciona en un colisionador. Las cotas acotan el efecto en quienes trabajarían igual |
+
+## 6. Datos faltantes
+
+| Decisión | Por qué | Resultado |
+|---|---|---|
+| **Imputación lógica** | El ingreso laboral de quien no trabaja es 0: no es una suposición | Los faltantes bajan de 58 a 39 (2.6 %), sin diferencia entre grupos |
+| **IPW, Lee, Manski y ajuste delta** | Supuestos cada vez más débiles sobre por qué falta el ingreso | El efecto sigue siendo positivo aun en el peor caso posible: +106 a +250 |
+
+## Preguntas frecuentes
+
+::: {.callout-tip collapse="true" appearance="simple"}
+## ¿Por qué HC3 si casi da lo mismo que los errores clásicos?
+Porque los errores clásicos son inválidos por construcción con un resultado 0-1. Que aquí casi coincidan es una propiedad de esta muestra, no una garantía. HC3 es válido en ambos casos.
+:::
+
+::: {.callout-tip collapse="true" appearance="simple"}
+## Las madres están en 5 centros. ¿No deberían agruparse los errores?
+Se agrupa cuando se asigna por grupo; aquí se sorteó madre por madre dentro de cada centro, y el centro entra como efecto fijo. Con 5 grupos la corrección sería inestable. Aun con errores agrupados y 4 grados de libertad, los efectos siguen siendo significativos (p entre 0.001 y 0.013).
+:::
+
+::: {.callout-tip collapse="true" appearance="simple"}
+## ¿Controlar por covariables no es "manipular" el resultado?
+No: son previas al sorteo, se fijaron antes de ver los resultados y el efecto es prácticamente igual sin ellas (9.63 frente a 9.66 pp). Solo mejoran la precisión.
+:::
+
+::: {.callout-tip collapse="true" appearance="simple"}
+## ¿El LATE vale para todas las madres?
+No, solo para las cumplidoras: el 62 % que usa el servicio si y solo si es sorteada. Atenuante: se parecen a la población postulante en las características observadas.
+:::
+
+::: {.callout-tip collapse="true" appearance="simple"}
+## El 20 % de las no sorteadas usó el servicio. ¿No contamina el experimento?
+No invalida el ITT, que compara por sorteo: solo lo diluye. Para el LATE, esas madres se descuentan al dividir entre la primera etapa. La alerta es otra: si usaron vacantes rechazadas por sorteadas, hay interferencia entre madres, y el ITT mide la política tal como funcionó, con ese reciclaje incluido.
+:::
+
+::: {.callout-tip collapse="true" appearance="simple"}
+## ¿Cómo saben que el sorteo fue estratificado?
+Se infiere de los datos: cada centro tiene exactamente 50 % de sorteadas, algo que con un sorteo madre por madre ocurriría con probabilidad de 8 × 10⁻⁷. Es una inferencia, no un documento, y se declara así.
+:::
+
+::: {.callout-tip collapse="true" appearance="simple"}
+## ¿Más ingreso significa mejores salarios?
+No hay evidencia de eso. El aumento de ingreso es del orden de lo que dan las horas adicionales al salario por hora típico, y el efecto en las madres que ya trabajaban no está identificado.
+:::
+
+::: {.callout-tip collapse="true" appearance="simple"}
+## ¿Vale la pena el programa?
+Los datos muestran que funciona. Saber si *vale la pena* requiere el costo por vacante, que no está en los datos: ese es el siguiente paso.
+:::
+
+Las referencias completas de cada método están al final de los notebooks [04](notebooks/04_analisis_causal.ipynb) y [05](notebooks/05_sensibilidad_robustez.ipynb).
