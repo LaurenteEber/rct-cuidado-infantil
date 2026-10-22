@@ -8,13 +8,40 @@ code-tools: false
 
 ```{=html}
 <div class="hero">
-  <div class="kicker">Evaluación de impacto · Experimento aleatorizado</div>
-  <h1>Ofrecer horario ampliado de cuidado infantil aumentó el empleo de las madres en casi 10 puntos</h1>
-  <p>Un sorteo de vacantes entre 1 500 madres postulantes en 5 centros permitió medir el efecto causal sobre empleo, horas, ingreso y bienestar, y separar el efecto de <em>ofrecer</em> el servicio del de <em>usarlo</em>.</p>
-  <a class="btn btn-primary" href="resumen.html">Resumen en 3 minutos</a>
-  <a class="btn btn-outline-light" href="notebooks/04_analisis_causal.html">Ver el análisis causal</a>
-  <a class="btn btn-outline-light" href="decisiones.html">Por qué este método</a>
-  <a class="btn btn-outline-light" href="en/summary.html">English summary</a>
+  <div class="hero-grid">
+    <div class="hero-text">
+      <span class="hero-badge"><span class="dot"></span>Evaluación de impacto · Experimento aleatorizado</span>
+      <h1>Ofrecer horario ampliado de cuidado infantil aumentó el empleo de las madres en <span class="hl">casi 10 puntos</span></h1>
+      <p class="lead-text">Un sorteo de vacantes permitió medir el efecto causal sobre empleo, horas, ingreso y bienestar, y separar el efecto de <em>ofrecer</em> el servicio del de <em>usarlo</em>.</p>
+      <ul class="hero-meta">
+        <li>1 500 madres postulantes</li>
+        <li>5 centros</li>
+        <li>Sorteo estratificado</li>
+        <li>ITT + LATE (2SLS)</li>
+      </ul>
+      <div class="hero-cta">
+        <a class="btn btn-hero-primary" href="resumen.html">Resumen en 3 minutos <span aria-hidden="true">→</span></a>
+        <a class="btn btn-hero-ghost" href="notebooks/04_analisis_causal.html">Ver el análisis causal</a>
+        <a class="btn btn-hero-ghost" href="decisiones.html">Por qué este método</a>
+      </div>
+    </div>
+    <aside class="hero-card" aria-label="Resultado principal">
+      <div class="hc-label">Tasa de empleo en el seguimiento</div>
+      <div class="hc-row">
+        <div class="hc-name">Sin oferta</div>
+        <div class="hc-track"><div class="hc-bar base" style="width:57.0%"></div></div>
+        <div class="hc-val">57.0 %</div>
+      </div>
+      <div class="hc-row">
+        <div class="hc-name">Con oferta</div>
+        <div class="hc-track"><div class="hc-bar" style="width:66.7%"></div></div>
+        <div class="hc-val strong">66.7 %</div>
+      </div>
+      <div class="hc-delta">+9.7 <small>pp</small></div>
+      <div class="hc-sub">Efecto de ofrecer la vacante (ITT) · IC 95 %: 4.8 a 14.5</div>
+      <div class="hc-foot"><span class="hc-chip">LATE</span> Entre quienes lo usan por la oferta: <strong>+15.5 pp</strong></div>
+    </aside>
+  </div>
 </div>
 ```
 

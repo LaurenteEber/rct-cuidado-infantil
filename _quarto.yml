@@ -12,7 +12,7 @@ project:
 lang: es
 
 website:
-  title: "RCT · Cuidado infantil y empleo"
+  title: "Cuidado infantil y empleo"
   description: "¿Ampliar el horario de cuidado infantil aumenta el empleo de las madres? Evaluación experimental con 1 500 madres postulantes."
   site-url: https://laurenteeber.github.io/rct-cuidado-infantil/
   repo-url: https://github.com/LaurenteEber/rct-cuidado-infantil
@@ -25,6 +25,8 @@ website:
     card-style: summary_large_image
   page-navigation: true
   navbar:
+    logo: assets/logo.svg
+    logo-alt: "Inicio"
     left:
       - href: index.qmd
         text: Inicio
