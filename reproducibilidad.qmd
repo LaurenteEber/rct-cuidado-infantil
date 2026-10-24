@@ -7,7 +7,7 @@ title: "Reproducibilidad y validación"
 
 ```
 rct-cuidado-infantil/
-├── notebooks/        # 00 a 05: el análisis completo, ya ejecutado
+├── notebooks/        # 00 a 06: el análisis completo, ya ejecutado
 ├── src/impact_eval/  # Funciones de ingesta, construcción de variables y estimación
 ├── tests/            # Pruebas unitarias con datos sintéticos
 ├── data/raw/         # Aquí va la base del curso (no incluida)
@@ -29,10 +29,10 @@ git clone https://github.com/LaurenteEber/rct-cuidado-infantil.git
 cd rct-cuidado-infantil
 uv sync                      # instala el entorno
 uv run pytest -v             # pruebas unitarias (no requieren la base)
-uv run jupyter lab           # ejecuta los notebooks en orden: 00 → 05
+uv run jupyter lab           # ejecuta los notebooks en orden: 00 → 06
 ```
 
-El notebook 01 genera `data/processed/caso05_analitico.csv`, que usan los notebooks 02 a 05. La semilla aleatoria (2026) fija la inferencia por aleatorización y los remuestreos.
+El notebook 01 genera `data/processed/caso05_analitico.csv`, que usan los notebooks 02 a 06. La semilla aleatoria (2026) fija la inferencia por aleatorización y los remuestreos.
 
 ## Cómo se diseñaron los notebooks
 
@@ -51,6 +51,7 @@ El análisis pasó por una revisión de validación, con estos cuatro frentes:
 | Recálculo independiente | ITT, primera etapa, LATE, balance, Holm, inferencia por aleatorización, IPW y cotas de Lee y de Manski, recalculados con código separado; todos coinciden |
 | Metodología | Estimandos, supuestos, errores estándar y pruebas, con cada hallazgo corregido en la versión publicada |
 | Coherencia | Las decisiones anunciadas en un notebook se cumplen en los siguientes |
+| Revisión posterior | Tras la exposición se rehízo la inferencia agrupando por centro (notebook 06); los notebooks 00, 04 y 05 enlazan a esa revisión donde corresponde |
 
 Las pruebas unitarias (`tests/`) verifican con datos sintéticos de efecto conocido que los estimadores recuperan el efecto verdadero: ITT, cociente de Wald, inferencia por aleatorización, cotas de Lee, bootstrap estratificado, balance y construcción de variables.
 

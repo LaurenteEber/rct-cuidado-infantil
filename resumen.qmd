@@ -32,6 +32,8 @@ Hubo una complicación: **no todas usaron lo asignado**. El 17 % de las sorteada
 
 Los resultados se mantienen con otros métodos de estimación, al excluir cualquier centro, al corregir por haber probado varios resultados y aun en el peor escenario posible para los datos faltantes de ingreso.
 
+**Una revisión posterior a la exposición.** Los 5 centros pueden ser una muestra de los centros de la red municipal, y la pregunta de política es qué pasaría si se amplía el horario en otros centros. Por eso rehicimos la inferencia agrupando por centro, con un método diseñado para pocos grupos. El efecto estimado no cambia, pero el margen se ensancha: por cada 100 madres a las que se ofrece la vacante en otro centro, podrían emplearse **entre 3 y 16 más**. Sigue siendo un efecto claramente positivo; la lección es medir centro por centro al escalar. Detalle en el [notebook 06](notebooks/06_inferencia_conglomerados.ipynb).
+
 ## Qué no podemos afirmar
 
 - **A quién focalizar:** no encontramos diferencias significativas entre subgrupos (madres solas, sin red de cuidado, con empleo previo), pero el estudio solo detectaría diferencias grandes.
@@ -40,6 +42,6 @@ Los resultados se mantienen con otros métodos de estimación, al excluir cualqu
 
 ## Recomendación
 
-La evidencia respalda **ampliar el horario de cuidado infantil** como política para aumentar el empleo de las madres postulantes. El siguiente paso es estimar su **costo por madre adicional empleada** y medir efectos de más largo plazo.
+La evidencia respalda **ampliar el horario de cuidado infantil** como política para aumentar el empleo de las madres postulantes. Si se extiende a otros centros, conviene hacerlo de forma escalonada y medir resultados en cada uno. El siguiente paso es estimar su **costo por madre adicional empleada** y medir efectos de más largo plazo.
 
 [Ver el análisis completo →](notebooks/00_planteamiento_teoria_cambio.ipynb){.btn .btn-primary}

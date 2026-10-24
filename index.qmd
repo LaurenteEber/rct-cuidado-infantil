@@ -38,7 +38,7 @@ code-tools: false
         <div class="hc-val strong">66.7 %</div>
       </div>
       <div class="hc-delta">+9.7 <small>pp</small></div>
-      <div class="hc-sub">Efecto de ofrecer la vacante (ITT) · IC 95 %: 4.8 a 14.5</div>
+      <div class="hc-sub">Efecto de ofrecer la vacante (ITT) · IC 95 %: 3.4 a 16.0, agrupado por centro</div>
       <div class="hc-foot"><span class="hc-chip">LATE</span> Entre quienes lo usan por la oferta: <strong>+15.5 pp</strong></div>
     </aside>
   </div>
@@ -47,26 +47,26 @@ code-tools: false
 
 ## Resultados principales
 
-Efecto de **ofrecer** la vacante (ITT), comparado con las madres no sorteadas:
+Efecto de **ofrecer** la vacante (ITT), comparado con las madres no sorteadas. Los intervalos están agrupados por centro (wild cluster bootstrap y $t(4)$), para que valgan también para otros centros de la red municipal:
 
 ```{=html}
 <div class="stats">
-  <div class="stat"><div class="num">+9.7 pp</div><div class="lab">Empleo</div><div class="det">de 57.0 % a 66.7 % · IC 95 %: 4.8 a 14.5</div></div>
-  <div class="stat"><div class="num">+5.5 h</div><div class="lab">Horas semanales</div><div class="det">+27 % · IC 95 %: 3.7 a 7.3</div></div>
-  <div class="stat"><div class="num">+189</div><div class="lab">Ingreso mensual (u.m.)</div><div class="det">+24 % · IC 95 %: 116 a 262</div></div>
-  <div class="stat"><div class="num">+3.4</div><div class="lab">Bienestar (0-100)</div><div class="det">≈ 0.33 desviaciones estándar</div></div>
+  <div class="stat"><div class="num">+9.7 pp</div><div class="lab">Empleo</div><div class="det">de 57.0 % a 66.7 % · IC 95 %: 3.4 a 16.0</div></div>
+  <div class="stat"><div class="num">+5.5 h</div><div class="lab">Horas semanales</div><div class="det">+27 % · IC 95 %: 3.0 a 8.0</div></div>
+  <div class="stat"><div class="num">+189</div><div class="lab">Ingreso mensual (u.m.)</div><div class="det">+24 % · IC 95 %: 74 a 303</div></div>
+  <div class="stat"><div class="num">+3.4</div><div class="lab">Bienestar (0-100)</div><div class="det">≈ 0.33 desviaciones estándar · IC 95 %: 2.4 a 4.5</div></div>
 </div>
 ```
 
 Entre las madres que usaron el servicio *gracias* al sorteo (el 62 %), el efecto de **usarlo** (LATE) es de **+15.5 puntos de empleo** y **+302 u.m. de ingreso mensual**.
 
-![ITT de la oferta según tres especificaciones, con intervalos de confianza al 95 %.](assets/itt_forest.png){fig-alt="Gráfico de bosque con el efecto de la oferta sobre empleo, horas, ingreso, bienestar y un índice laboral, en tres especificaciones; todos los intervalos excluyen el cero."}
+![ITT de la oferta según tres especificaciones. Los intervalos de este gráfico son HC3, a nivel de madre; con inferencia agrupada por centro son más anchos ([notebook 06](notebooks/06_inferencia_conglomerados.ipynb)).](assets/itt_forest.png){fig-alt="Gráfico de bosque con el efecto de la oferta sobre empleo, horas, ingreso, bienestar y un índice laboral, en tres especificaciones; todos los intervalos excluyen el cero."}
 
 ## Qué aprendimos
 
 ```{=html}
 <div class="cards">
-  <div class="card-x"><h4>El efecto es sólido</h4><p>Se mantiene con otros estimadores, al excluir cualquier centro, con corrección por multiplicidad, con inferencia por aleatorización y aun en el peor escenario de datos faltantes.</p></div>
+  <div class="card-x"><h4>El efecto es sólido</h4><p>Se mantiene con otros estimadores, al excluir cualquier centro, con corrección por multiplicidad, con inferencia por aleatorización, con errores agrupados por centro y aun en el peor escenario de datos faltantes.</p></div>
   <div class="card-x amber"><h4>El mecanismo queda abierto</h4><p>El servicio permite trabajar a más madres. Cuánto aumentan las horas de quienes ya trabajaban no está identificado: puede ir de casi nada a más de la mitad del efecto.</p></div>
   <div class="card-x green"><h4>No hay base para focalizar</h4><p>No se encontraron diferencias significativas entre subgrupos (madres solas, sin red de cuidado), y el estudio solo detectaría diferencias grandes.</p></div>
 </div>
@@ -84,6 +84,7 @@ Cada etapa es un notebook ejecutado, con el código plegado, explicaciones en le
   <a href="notebooks/03_eda.html"><div class="chapter"><div class="n">03</div><div><div class="t">Análisis exploratorio</div><div class="d">Perfil de las madres, tendencia común y evidencia de que el uso del servicio está autoseleccionado.</div></div></div></a>
   <a href="notebooks/04_analisis_causal.html"><div class="chapter"><div class="n">04</div><div><div class="t">Análisis causal</div><div class="d">ITT con efectos fijos y covariables, Holm, inferencia por aleatorización, LATE por 2SLS y subgrupos.</div></div></div></a>
   <a href="notebooks/05_sensibilidad_robustez.html"><div class="chapter"><div class="n">05</div><div><div class="t">Sensibilidad y robustez</div><div class="d">Estimador de Lin, IPW, cotas de Lee y de Manski, ajuste delta y supuestos del instrumento.</div></div></div></a>
+  <a href="notebooks/06_inferencia_conglomerados.html"><div class="chapter"><div class="n">06</div><div><div class="t">Revisión: inferencia agrupada por centro</div><div class="d">Si los 5 centros son una muestra de la red municipal, hay que agrupar. Wild cluster bootstrap con pocos grupos: el efecto se mantiene, con más incertidumbre.</div></div></div></a>
 </div>
 ```
 

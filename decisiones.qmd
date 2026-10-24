@@ -29,9 +29,9 @@ Un resultado es tan creíble como las decisiones que lo producen. Esta página r
 
 | Decisión | Por qué | Qué se descartó | Qué habría cambiado |
 |---|---|---|---|
-| **Errores estándar HC3** | Con un resultado binario, la varianza del error cambia entre observaciones por construcción, y Breusch-Pagan lo confirma (p < 0.001 en empleo, horas e ingreso). HC3 corrige además la influencia de cada observación y es el más conservador en muestras finitas | Errores clásicos, HC0 o HC1 | Casi nada en el número (en empleo: 2.47 clásico, 2.48 HC3). Se elige porque es válido aunque el modelo no sea perfecto |
-| **No agrupar errores por centro** | Se agrupa cuando la asignación se hace por grupo, y aquí fue madre por madre. Además, con solo 5 grupos la corrección es inestable | Errores agrupados por centro | Resultados erráticos: −30 % en el error de bienestar y +11 % en el de ingreso |
-| **Holm sobre los resultados secundarios** | Controla los falsos positivos en la familia (horas, ingreso, bienestar) sin suponer independencia, y es más potente que Bonferroni. El empleo, resultado primario, no se ajusta | Bonferroni o no corregir | Ninguna conclusión cambia: los p ajustados son menores que 10⁻⁶ |
+| **Errores estándar HC3 (a nivel de madre)** | Con un resultado binario, la varianza del error cambia entre observaciones por construcción, y Breusch-Pagan lo confirma (p < 0.001 en empleo, horas e ingreso). HC3 corrige además la influencia de cada observación y es el más conservador en muestras finitas | Errores clásicos, HC0 o HC1 | Casi nada en el número (en empleo: 2.47 clásico, 2.48 HC3). Se elige porque es válido aunque el modelo no sea perfecto |
+| **Agrupar por centro (revisión posterior)** | En la versión expuesta no se agrupó, porque el sorteo fue madre por madre. Pero el caso dice que la municipalidad amplió el horario en 5 centros: si esos centros son una muestra de la red, el efecto puede variar entre centros y esa variación debe entrar en el margen de error (Abadie et al., 2023). Con solo 5 grupos se usa wild cluster bootstrap con pesos de Webb y valores críticos $t(4)$ | Descartar el agrupamiento porque “solo son 5 centros” | El efecto es el mismo; el IC del empleo pasa de 4.8-14.5 a **3.4-16.0 pp** y los $p$ quedan entre 0.013 y 0.026. Detalle en el [notebook 06](notebooks/06_inferencia_conglomerados.ipynb) |
+| **Holm sobre los resultados secundarios** | Controla los falsos positivos en la familia (horas, ingreso, bienestar) sin suponer independencia, y es más potente que Bonferroni. El empleo, resultado primario, no se ajusta | Bonferroni o no corregir | Ninguna conclusión cambia: con HC3 los p ajustados son menores que 10⁻⁶; con inferencia agrupada, 0.039 |
 | **Inferencia por aleatorización** | Usa solo el mecanismo del sorteo (5 000 permutaciones dentro de cada centro), sin aproximaciones de muestra grande | Confiar solo en los valores p asintóticos | Confirma los resultados: ninguna permutación igualó el efecto observado |
 
 ## 4. Del ITT al LATE
@@ -68,7 +68,7 @@ Porque los errores clásicos son inválidos por construcción con un resultado 0
 
 ::: {.callout-tip collapse="true" appearance="simple"}
 ## Las madres están en 5 centros. ¿No deberían agruparse los errores?
-Se agrupa cuando se asigna por grupo; aquí se sorteó madre por madre dentro de cada centro, y el centro entra como efecto fijo. Con 5 grupos la corrección sería inestable. Aun con errores agrupados y 4 grados de libertad, los efectos siguen siendo significativos (p entre 0.001 y 0.013).
+Sí, y es una corrección que hicimos después de la exposición, a partir de la pregunta del instructor. Hay dos razones para agrupar: que el tratamiento se asigne por grupo, o que los grupos sean una muestra de una población mayor (Abadie et al., 2023). La primera no aplica (el sorteo fue madre por madre), pero la segunda sí: los 5 centros pueden ser una muestra de los centros municipales, y la pregunta de política es qué pasaría en *otros* centros. Que sean pocos no justifica omitir el agrupamiento; obliga a usar métodos para pocos grupos. Con wild cluster bootstrap (pesos de Webb) el efecto sigue siendo significativo en los cuatro resultados (p entre 0.013 y 0.026), con intervalos más anchos. Ver el [notebook 06](notebooks/06_inferencia_conglomerados.ipynb).
 :::
 
 ::: {.callout-tip collapse="true" appearance="simple"}
@@ -101,4 +101,4 @@ No hay evidencia de eso. El aumento de ingreso es del orden de lo que dan las ho
 Los datos muestran que funciona. Saber si *vale la pena* requiere el costo por vacante, que no está en los datos: ese es el siguiente paso.
 :::
 
-Las referencias completas de cada método están al final de los notebooks [04](notebooks/04_analisis_causal.ipynb) y [05](notebooks/05_sensibilidad_robustez.ipynb).
+Las referencias completas de cada método están al final de los notebooks [04](notebooks/04_analisis_causal.ipynb), [05](notebooks/05_sensibilidad_robustez.ipynb) y [06](notebooks/06_inferencia_conglomerados.ipynb).

@@ -46,6 +46,8 @@ website:
             text: "04 · Análisis causal"
           - href: notebooks/05_sensibilidad_robustez.ipynb
             text: "05 · Sensibilidad y robustez"
+          - href: notebooks/06_inferencia_conglomerados.ipynb
+            text: "06 · Revisión: inferencia agrupada por centro"
       - href: decisiones.qmd
         text: Decisiones metodológicas
       - href: reproducibilidad.qmd
@@ -65,6 +67,7 @@ website:
         - notebooks/03_eda.ipynb
         - notebooks/04_analisis_causal.ipynb
         - notebooks/05_sensibilidad_robustez.ipynb
+        - notebooks/06_inferencia_conglomerados.ipynb
   page-footer:
     left: "Eber Laurente · Grupo 5, curso de Evaluación de Políticas Públicas (CIES)"
     right: "Código MIT · [GitHub](https://github.com/LaurenteEber/rct-cuidado-infantil)"

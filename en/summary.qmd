@@ -7,7 +7,7 @@ lang: en
 
 ## The question
 
-Does extending the opening hours of childcare centers increase mothers' employment? Childcare centers extended their hours and, because applicants exceeded available slots, **slots were allocated by lottery** among 1,500 applicant mothers across 5 centers. The full analysis (in Spanish) is organized in six executed notebooks.
+Does extending the opening hours of childcare centers increase mothers' employment? Childcare centers extended their hours and, because applicants exceeded available slots, **slots were allocated by lottery** among 1,500 applicant mothers across 5 centers. The full analysis (in Spanish) is organized in seven executed notebooks.
 
 ## Design
 
@@ -16,18 +16,21 @@ Does extending the opening hours of childcare centers increase mothers' employme
 
 ## Main results
 
+Confidence intervals are clustered by center (see *Methods*), so they apply to other centers in the municipal network.
+
 | Outcome | ITT (95 % CI) | LATE (95 % CI) |
 |---|---|---|
-| Employment | **+9.7 pp** (4.8, 14.5) | **+15.5 pp** (7.9, 23.1) |
-| Weekly hours | +5.5 (3.7, 7.3) | +8.8 (6.0, 11.6) |
-| Monthly earnings (m.u.) | +189 (116, 262) | +302 (189, 415) |
-| Well-being (0-100) | +3.4 (2.4, 4.5) | +5.5 (3.9, 7.1) |
+| Employment | **+9.7 pp** (3.4, 16.0) | **+15.5 pp** (6.1, 24.9) |
+| Weekly hours | +5.5 (3.0, 8.0) | +8.8 (5.3, 12.3) |
+| Monthly earnings (m.u.) | +189 (74, 303) | +302 (151, 454) |
+| Well-being (0-100) | +3.4 (2.4, 4.5) | +5.5 (4.4, 6.6) |
 
 The offer raised employment from 57 % to 67 %: about 10 additional mothers working for every 100 offered a slot.
 
 ## Methods, in brief
 
-- **Estimation:** OLS with center fixed effects and 10 pre-specified baseline covariates; HC3 heteroskedasticity-robust standard errors. Standard errors are not clustered: assignment was individual and there are only 5 centers.
+- **Estimation:** OLS with center fixed effects and 10 pre-specified baseline covariates.
+- **Clustering (post-presentation revision):** the original analysis used individual-level HC3 errors because the lottery was run mother by mother. However, the 5 centers can be seen as a sample of the municipal network, which is a reason to cluster even with individual assignment (Abadie, Athey, Imbens and Wooldridge, 2023). With only 5 clusters, we use a restricted wild cluster bootstrap with Webb weights (full enumeration) and $t(4)$ critical values. Point estimates are unchanged; p-values rise to 0.013-0.026 and the employment CI widens from (4.8, 14.5) to (3.4, 16.0).
 - **Inference:** Holm correction for the secondary outcomes and randomization inference (5,000 within-center permutations; none matched the observed effects).
 - **LATE:** two-stage least squares with the lottery as the instrument.
 
@@ -37,11 +40,11 @@ The offer raised employment from 57 % to 67 %: about 10 additional mothers worki
 - For missing earnings (2.6 % after a logical imputation), the effect remains positive under inverse probability weighting, Lee bounds, delta adjustment and even worst-case Manski bounds (+106 to +250).
 - The LATE remains significant unless a direct effect of the lottery explained more than about half of the ITT.
 - **Not identified:** how much of the effect on hours comes from mothers who would have worked anyway (Lee bounds: 4 % to 60 % of the ITT).
-- **Not detected:** heterogeneity by single motherhood, access to informal care, or prior employment. The study is underpowered for moderate differences.
+- **Not detected:** heterogeneity across centers (joint test p = 0.51 for employment) or by single motherhood, access to informal care, or prior employment. The study is underpowered for moderate differences.
 
 ## Takeaway
 
-Extending childcare hours is an effective policy to increase applicant mothers' employment. The next step is a cost-effectiveness analysis (cost per additional employed mother) and longer-term follow-up.
+Extending childcare hours is an effective policy to increase applicant mothers' employment. Scaling it to other centers should be staggered and monitored center by center. The next step is a cost-effectiveness analysis (cost per additional employed mother) and longer-term follow-up.
 
 ---
 
